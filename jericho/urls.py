@@ -3,14 +3,14 @@ from django.conf.urls.static import static
 import settings
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'jericho.views.home', name='home'),
     # url(r'^jericho/', include('jericho.foo.urls')),
-    url(r'^$', 'agad.views.index', name='home'),
+    url(r'^$', 'jericho.views.index', name='home'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

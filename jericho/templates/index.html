@@ -7,14 +7,14 @@
 {% endblock %}
 
 {% block body-content %}
-    {% include 'partial/comic.html' %}
+    {% include 'partials/comic.html' %}
 {% endblock %}
 
 {% block body-scripts %}
     <!-- INIT -->
     <script>
         function main() {
-            var main = new agad.Main();
+            var main = new jericho.Main();
         }
         main();
     </script>

@@ -38,7 +38,6 @@ goog.require('goog.style');
 goog.require('goog.ui.AdvancedTooltip');
 goog.require('goog.ui.Popup');
 goog.require('goog.ui.Tooltip');
-goog.require('userFacingGlobals');
 
 /**
  * Initializes the object.
