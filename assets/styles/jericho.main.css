@@ -10,7 +10,7 @@ Width: All Sizes
 /* --------------------------------------------
 Import Google Font
 ----------------------------------------------- */
-@import url('http://fonts.googleapis.com/css?family=Droid+Sans:400,700');
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,300,700');
 /*
 @import url('//fonts.googleapis.com/css?family=Droid+Sans:400,700');
 */
@@ -29,10 +29,10 @@ body {
     padding: 0;
     margin: 0;
     min-width: 1070px;
-    overflow: hidden;
-    font-family: 'Droid Sans', arial, serif;
+    font-family: 'Open Sans', arial, serif;
     font-size: 12px;
-}
+    overflow-y: scroll;
+ }
 
 .bold {
     font-weight: 700;
@@ -50,4 +50,37 @@ body {
 
 .clearfix {
     *zoom: 1;
+}
+
+/* --------------------------------------------
+Header Section
+----------------------------------------------- */
+.header-back {
+    background: #666;
+}
+
+.header-back,
+.header {
+    height: 450px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: -2;
+}
+
+/* --------------------------------------------
+Masonry Section
+----------------------------------------------- */
+.masonry {
+    margin-top: 450px;
+    padding: 40px 0 80px;
+    position: relative;
+    z-index: 2;
+    background: #f00;
+}
+
+.content {
+    width: 1070px;
+    height: 1000px;
+    margin: 0 auto;
 }
