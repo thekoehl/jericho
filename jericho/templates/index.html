@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block head-scripts %}
+    <!-- SRC -->
+    <script type="text/javascript" src="{{ MEDIA_URL }}scripts/closure-library/closure/goog/base.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}scripts/jericho.main.js"></script>
+    <!-- END SRC -->
+{% endblock %}
+
+{% block body-content %}
+    {% include 'partial/comic.html' %}
+{% endblock %}
+
+{% block body-scripts %}
+    <!-- INIT -->
+    <script>
+        function main() {
+            var main = new agad.Main();
+        }
+        main();
+    </script>
+    <!-- END INIT -->
+
+    <!-- COMPILED
+    <script type="text/javascript" src="{{ MEDIA_URL }}scripts/jericho.main.min.js"></script>
+    END COMPILED -->
+{% endblock %}

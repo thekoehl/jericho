@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" {% block html-attributes %}{% endblock %}>
+    <head>
+        <!-- META DATA -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="MSSmartTagsPreventParsing" content="true" />
+        <meta http-equiv="imagetoolbar" content="no" />
+        <!--[if IE]><meta http-equiv="cleartype" content="on" /><![endif]-->
+
+        <!-- SEO -->
+        <title>{% block title %}TheKoehl{% endblock %}</title>
+        <meta name="description" content="TheKoehl is back and its time to make up for lost time.">
+        <meta name="author" content="gkoehl" />
+        <meta name="robots" content="index,follow,archive" />
+
+        <!-- ICON -->
+        <!-- <link href="//www.google.com/images/icons/feature/search-b16.png" rel="shortcut icon"> -->
+
+        <!-- FACEBOOK / OPENGRAPH SHARING -->
+        <meta property="og:title" content="TheKoehl"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="http://www.thekoehl.com"/>
+        <meta property="og:image" content="{{ MEDIA_URL }}images/preview.png"/>
+        <meta property="og:site_name" content="TheKoehl"/>
+        <meta property="og:description" content="TheKoehl is back and its time to make up for lost time."/>
+
+        <!-- STYLESHEETS -->
+        <link type="text/css" rel="stylesheet" media="screen, projection" href="{{ MEDIA_URL }}styles/jericho.reset.css">
+        <link type="text/css" rel="stylesheet" media="screen, projection" href="{{ MEDIA_URL }}styles/jericho.main.css">
+        <!--[if lte IE 8]><link type="text/css" rel="stylesheet" media="screen, projection" href="{{ MEDIA_URL }}styles/google.agad.ie8.css" /><![endif]-->
+        <!--[if lte IE 7]><link type="text/css" rel="stylesheet" media="screen, projection" href="{{ MEDIA_URL }}styles/google.agad.ie7.css" /><![endif]-->
+
+        {% block head-scripts %}{% endblock %}
+        {% block head-base %}{% endblock %}
+    </head>
+    <body {% block body-attributes %}{% endblock %}>
+        {% block body-content %}{% endblock %}
+        {% block body-scripts %}{% endblock %}
+    </body>
+</html>

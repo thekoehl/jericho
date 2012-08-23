@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project
+    name="Jericho (build)"
+    basedir="."
+    default="full-build"
+>
+
+    <!-- Commmon Paths. -->
+    <property name="base.dir" value=".." />
+    <property name="src.dir" value=".." />
+    <property name="build.dir" value="../build" />
+    <property name="ant.dir" value="." />
+    <property name="jsdoc.dir" value="${ant.dir}/tools/jsdoc-toolkit" />
+
+    <!-- Closure Files. -->
+    <property name="closure.dir" value="${src.dir}/assets/scripts/closure-library" />
+    <property name="compiler.jar" value="${closure.dir}/closure/bin/compiler.jar" />
+
+    <!-- YUI Compressor Files. -->
+    <property name="yui-compressor.jar"
+        location="${ant.dir}/tools/yuicompressor-2.4.7/build/yuicompressor-2.4.7.jar" />
+    <property name="yui-compressor-ant-task.jar"
+        location="${ant.dir}/tools/yui-compressor-ant-task-0.5/bin/yui-compressor-ant-task-0.5.jar" />
+    <path id="yui.classpath">
+        <pathelement location="${yui-compressor.jar}" />
+        <pathelement location="${yui-compressor-ant-task.jar}" />
+    </path>
+    <taskdef name="yui-compressor" classname="net.noha.tools.ant.yuicompressor.tasks.YuiCompressorTask">
+        <classpath refid="yui.classpath" />
+    </taskdef>
+
+    <!-- Define Closure Library 'calcdeps.py' compiler script. -->
+    <macrodef name="calcdeps">
+        <attribute name="input" />
+        <attribute name="output" />
+        <attribute name="compilationlevel" default="ADVANCED_OPTIMIZATIONS" />
+        <sequential>
+            <exec executable="python" failonerror="true" logError="true" output="@{output}">
+                <arg value="${closure.dir}/closure/bin/calcdeps.py" />
+                <arg line='-i @{input}' />
+                <arg line='-p ${closure.dir}' />
+                <!-- <arg line='-p ${src.dir}/assets/scripts/jericho.global.js' /> -->
+                <arg line='-o compiled' />
+                <arg line='-c ${compiler.jar}' />
+                <arg line='-f "--compilation_level=@{compilationlevel}"' />
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <!-- Full build (copy/update/compile/compress) from 'src' to 'build'. -->
+    <target name="full-build"
+        depends="copy-files, update-js-files, compile-js-files, compress-css, document, zip-files">
+        <echo message="Full build" />
+    </target>
+
+    <!-- Copy files to build dir, update paths, remove dev references. -->
+    <target name="copy-files">
+
+        <!-- Remove files being copied from src. -->
+        <delete quiet="true">
+            <fileset dir="${build.dir}/jericho/" />
+            <fileset dir="${build.dir}/assets/" />
+            <fileset dir="${build.dir}" includes="**/*.py" />
+        </delete>
+
+        <!-- Copy Python files. -->
+        <copy todir="${build.dir}">
+            <fileset dir="${src.dir}" includes="*.py" />
+        </copy>
+
+        <!-- Copy Images -->
+        <copy todir="${build.dir}/assets/images">
+            <fileset dir="${src.dir}/assets/images" />
+        </copy>
+
+        <!-- Copy Scripts -->
+        <copy todir="${build.dir}/assets/scripts">
+            <fileset dir="${src.dir}/assets/scripts">
+                <include name="jericho.main.js" />
+            </fileset>
+        </copy>
+
+        <!-- Copy Styles -->
+        <copy todir="${build.dir}/assets/styles">
+            <fileset dir="${src.dir}/assets/styles" />
+        </copy>
+
+        <!-- Copy Jericho Module -->
+        <copy todir="${build.dir}/jericho">
+            <fileset dir="${src.dir}/jericho" />
+        </copy>
+
+        <!-- Define .html fileset. -->
+        <fileset id="htmlfiles" dir="${build.dir}/jericho/templates">
+            <include name="base.html" />
+            <include name="index.html" />
+        </fileset>
+
+        <!-- Remove uncompressed .js includes. -->
+        <replaceregexp match="\&lt;!\-\- SRC.*END SRC \-\-\&gt;"
+            replace=""
+            flags="s">
+            <fileset refid="htmlfiles" />
+        </replaceregexp>
+
+        <!-- Remove initialization from the template body script. -->
+        <replaceregexp match="\&lt;!\-\- INIT.*END INIT \-\-\&gt;"
+            replace=""
+            flags="s">
+            <fileset refid="htmlfiles" />
+        </replaceregexp>
+
+        <!-- Remove comments around compiled .js include. -->
+        <replaceregexp match="\&lt;!\-\- COMPILED(.*)END COMPILED \-\-\&gt;"
+            replace="\1"
+            flags="s">
+            <fileset refid="htmlfiles" />
+        </replaceregexp>
+
+        <!-- Update .css paths to min version. -->
+        <replaceregexp match="\{\{ MEDIA_URL \}\}styles/(.*)\.css"
+            replace="\{\{ MEDIA_URL \}\}styles/\1.min.css"
+            flags="g">
+            <fileset refid="htmlfiles" />
+        </replaceregexp>
+
+        <!-- Remove empty lines from .html. -->
+        <replaceregexp match="^\s+[\r\n]"
+            replace=""
+            flags="mg">
+            <fileset refid="htmlfiles" />
+        </replaceregexp>
+
+    </target>
+
+    <!-- Update JS Files. -->
+    <target name="update-js-files">
+        <mkdir dir="${build.dir}/assets/scripts" />
+        <mkdir dir="${build.dir}/assets/scripts/temp" />
+        <copy file="${src.dir}/assets/scripts/jericho.main.js"
+            tofile="${build.dir}/assets/scripts/temp/jericho.main.js" />
+        <replaceregexp file="${build.dir}/assets/scripts/temp/jericho.main.js"
+            match="// var main = new jericho.Main"
+            replace="var main = new jericho.Main"
+            flags="sg" />
+    </target>
+
+    <target name="depswriter">
+        <echo>Calculating dependancies...</echo>
+        <exec executable="python" failonerror="true" logError="true" output="${src.dir}/assets/scripts/deps.js">
+            <arg value="${closure.dir}/closure/bin/build/depswriter.py" />
+            <arg line="${build.dir}/assets/scripts/jericho.main.js" />
+        </exec>
+    </target>
+
+    <!-- Compile JS Files. -->
+    <target name="compile-js-files">
+        <calcdeps input="${build.dir}/assets/scripts/temp/jericho.main.js"
+            output="${build.dir}/assets/scripts/jericho.main.min.js" />
+        <delete dir="${build.dir}/assets/scripts/temp" />
+    </target>
+
+    <!-- Compress CSS. -->
+    <target name="compress-css">
+        <mkdir dir="${build.dir}/assets/styles" />
+        <mkdir dir="${build.dir}/assets/styles/temp" />
+        <yui-compressor warn="false" munge="true" charset="UTF-8"
+            fromdir="${src.dir}/assets/styles"
+            todir="${build.dir}/assets/styles/temp">
+            <include name="jericho.main.css" />
+        </yui-compressor>
+        <copy file="${build.dir}/assets/styles/temp/jericho.main-min.css"
+            tofile="${build.dir}/assets/styles/jericho.main.min.css" />
+        <delete dir="${build.dir}/assets/styles/temp" />
+    </target>
+
+    <!-- Documentation. -->
+    <target name="document">
+        <echo>Generating documentation...</echo>
+        <delete dir="${build.dir}/docs"/>
+        <mkdir dir="${build.dir}/docs"/>
+        <exec executable="java" failonerror="true">
+            <arg line="-jar ${jsdoc.dir}/jsrun.jar ${jsdoc.dir}/app/run.js" />
+            <arg line="-t=${jsdoc.dir}/templates/jsdoc" />
+            <arg line="-d=${build.dir}/docs" />
+            <arg line="${build.dir}/assets/scripts/jericho.main.js" />
+            <arg line="-a" />
+            <arg line="-r" />
+        </exec>
+    </target>
+
+    <!-- Zip Files. -->
+    <target name="zip-files">
+        <zip destfile="${build.dir}/jericho-compiled.zip" basedir="${build.dir}" excludes="**/*.zip" />
+    </target>
+</project>
