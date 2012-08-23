@@ -7,11 +7,13 @@
 {% endblock %}
 
 {% block body-content %}
-    <div class="header-back"></div>
     <div class="header">Test</div>
     <div class="masonry" role="main">
         <div class="content">
         </div>
+    </div>
+    <div class="footer">
+        &copy; {% now "Y" %} TheKoehl
     </div>
     {% include 'partials/comic.html' %}
 {% endblock %}
