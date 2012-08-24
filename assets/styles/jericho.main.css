@@ -60,6 +60,12 @@ body {
     color: #b3b3b3;
 }
 
+.box-shadow {
+    -moz-box-shadow: 0 3px 3px #ccc;
+    -webkit-box-shadow: 0 3px 3px #ccc;
+    box-shadow: 0 3px 3px #ccc;
+}
+
 .rounded-corners {
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -77,6 +83,17 @@ body {
 
 .grid-column-right {
     float: right;
+}
+
+.grid-center {
+    overflow: hidden;
+    text-align: center;
+}
+
+.grid-column-center {
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
 }
 
 .size-1of4 {
@@ -107,7 +124,7 @@ Header Section
 .hero-wrapper {
     width: 777px;
     padding: 20px;
-    border-top: 1px solid #E7F0F6;
+    border-top: 1px solid #e7f0f6;
     margin: 20px auto 0;
     -moz-box-shadow: 0 3px 3px #ccc;
     -webkit-box-shadow: 0 3px 3px #ccc;
@@ -180,14 +197,16 @@ Sidebar
 /* --------------------------------------------
 Post
 ----------------------------------------------- */
-.post {
+.post-container {
+    padding: 0 20px;
     margin-bottom: 20px;
+    color: #111;
 }
 
-.post-header {
+.post-original .post-header {
     height: 40px;
     /*padding: 0 10px;*/
-    border: 1px dotted #b3b3b3;
+    border: 2px dotted #e7f0f6;
     border-width: 1px 0;
     margin-bottom: 10px;
     line-height: 40px;
@@ -197,29 +216,47 @@ Post
     overflow: hidden;
 }
 
-.post-header .date {
+.post-original .date {
     padding: 1px 10px 0 0;
     font: normal 10px Courier, sans-serif;
 }
 
-.post-header .title {
+.post-original .title {
 
 }
 
-.post-header .author {
+.post-original .author {
     font-size: 12px;
     color: #b3b3b3;
 }
 
-.post .description {
+.post-original .description {
     margin-bottom: 10px;
     line-height: 1.5em;
 }
 
-.post .meta {
+.post-original .meta {
     color: #b3b3b3;
     font-size: 11px;
     font-weight: 300;
+}
+
+/* --------------------------------------------
+Post - Activity
+----------------------------------------------- */
+.post-container.activity {
+    padding: 20px;
+    background: #fcfcfc;
+    border: 2px solid #e7f0f6;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.post-options a {
+    color: #b3b3b3;
+    text-decoration: none;
 }
 
 /* --------------------------------------------
