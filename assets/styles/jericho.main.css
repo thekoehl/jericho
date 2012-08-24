@@ -52,41 +52,168 @@ body {
     *zoom: 1;
 }
 
+.blue {
+    color: #3765AF;
+}
+
+.grey {
+    color: #b3b3b3;
+}
+
+.rounded-corners {
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.grid {
+    overflow: hidden;
+}
+
+.grid-column {
+    float: left;
+}
+
+.grid-column-right {
+    float: right;
+}
+
+.size-1of4 {
+    width: 25%;
+}
+
+.size-3of4 {
+    width: 75%;
+}
+
 /* --------------------------------------------
-Header
+Header Section
 ----------------------------------------------- */
-.header {
+.header-section-wrapper {
     background: #f0f0f0;
-    height: 450px;
+    /*background: #0d0d21 url('../images/star-background.png') top left repeat;*/
+    height: 530px;
     width: 100%;
     position: fixed;
     top: 0;
     z-index: -2;
 }
 
+.header-section {
+    text-align: center;
+}
+
+.hero-wrapper {
+    width: 777px;
+    padding: 20px;
+    border-top: 1px solid #E7F0F6;
+    margin: 20px auto 0;
+    -moz-box-shadow: 0 3px 3px #ccc;
+    -webkit-box-shadow: 0 3px 3px #ccc;
+    box-shadow: 0 3px 3px #ccc;
+    background-color: #fff;
+}
+
+.hero {
+    padding: 20px;
+    background-color: #fff;
+}
+
 /* --------------------------------------------
-Masonry Section
+Content Section
 ----------------------------------------------- */
-.masonry {
-    margin-top: 450px;
+.content-section-wrapper {
+    width: 100%;
+    margin-top: 530px;
     padding: 40px 0 80px;
+    border-top: 2px solid #b3b3b3;
+    border-bottom: 2px solid #3765AF;
     position: relative;
     z-index: 2;
     background: #fff;
 }
 
-.content {
+.content-section {
     width: 1070px;
-    height: 1000px;
     margin: 0 auto;
 }
 
+.content-header {
+    padding-bottom: 40px;
+    font-size: 25px;
+    text-align: center;
+}
+
 /* --------------------------------------------
-Footer
+Sidebar
 ----------------------------------------------- */
-.footer {
-    background: #efefef;
-    height: 450px;
+.sidebar {
+    margin-left: 20px;
+    padding: 0 20px 20px;
+    background: #ffb;
+    border: 2px solid #ff0;
+}
+
+.sidebar .header {
+    height: 40px;
+    border-bottom: 2px dotted #ff0;
+    line-height: 40px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+/* --------------------------------------------
+Post
+----------------------------------------------- */
+.post {
+    margin-bottom: 20px;
+}
+
+.post-header {
+    height: 40px;
+    /*padding: 0 10px;*/
+    border: 1px dotted #b3b3b3;
+    border-width: 1px 0;
+    margin-bottom: 10px;
+    line-height: 40px;
+    color: #3765AF;
+    font-size: 18px;
+    font-weight: 300;
+    overflow: hidden;
+}
+
+.post-header .title {
+
+}
+
+.post-header .author {
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+.post .description {
+    margin-bottom: 10px;
+    line-height: 1.5em;
+}
+
+.post .meta {
+    color: #b3b3b3;
+}
+
+/* --------------------------------------------
+Footer Section
+----------------------------------------------- */
+.footer-section-wrapper {
     width: 100%;
     position: relative;
+    background: #efefef;
+    z-index: 2;
+}
+
+.footer-section {
+    width: 1070px;
+    padding: 40px 0;
+    margin: 0 auto;
+    text-align: center;
 }
