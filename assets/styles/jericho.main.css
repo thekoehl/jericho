@@ -140,8 +140,15 @@ Content Section
 }
 
 .content-header {
-    padding-bottom: 40px;
+    padding-bottom: 5px;
     font-size: 25px;
+    text-align: center;
+}
+
+.content-header-description {
+    padding-bottom: 40px;
+    color: #b3b3b3;
+    font-weight: 300;
     text-align: center;
 }
 
@@ -158,9 +165,16 @@ Sidebar
 .sidebar .header {
     height: 40px;
     border-bottom: 2px dotted #ff0;
+    margin-bottom: 10px;
     line-height: 40px;
     font-size: 18px;
     font-weight: 300;
+}
+
+.sidebar .description {
+    margin-bottom: 10px;
+    line-height: 1.5em;
+    color: #111;
 }
 
 /* --------------------------------------------
@@ -183,6 +197,11 @@ Post
     overflow: hidden;
 }
 
+.post-header .date {
+    padding: 1px 10px 0 0;
+    font: normal 10px Courier, sans-serif;
+}
+
 .post-header .title {
 
 }
@@ -199,6 +218,8 @@ Post
 
 .post .meta {
     color: #b3b3b3;
+    font-size: 11px;
+    font-weight: 300;
 }
 
 /* --------------------------------------------
@@ -207,8 +228,9 @@ Footer Section
 .footer-section-wrapper {
     width: 100%;
     position: relative;
-    background: #efefef;
+    background: #0d0d21;
     z-index: 2;
+    color: #fff;
 }
 
 .footer-section {
