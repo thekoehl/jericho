@@ -90,7 +90,12 @@ body {
     text-align: center;
 }
 
-.grid-column-center {
+.grid-right {
+    overflow: hidden;
+    text-align: right;
+}
+
+.grid-column-inline {
     display: inline-block;
     zoom: 1;
     *display: inline;
@@ -118,7 +123,21 @@ Header Section
 }
 
 .header-section {
+    width: 1070px;
+    position: relative;
+    margin: 0 auto;
     text-align: center;
+}
+
+.k-logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: block;
+    height: 94px;
+    width: 94px;
+    background: url('../images/k-logo.png') 0 0 no-repeat;
+    z-index: 3;
 }
 
 .hero-wrapper {
@@ -254,9 +273,44 @@ Post - Activity
     border-radius: 8px;
 }
 
-.post-options a {
+.post-actions {
+    height: 30px;
+    border: 1px dotted #e7f0f6;
+    border-width: 2px 0;
+    margin: 10px 0 0;
+    line-height: 30px;
+}
+
+.post-actions a {
     color: #b3b3b3;
     text-decoration: none;
+}
+
+.post-actions li {
+    padding-left: 10px;
+}
+
+.post-actions li:first-child {
+    padding-left: 0;
+}
+
+.post-author-wrapper {
+    padding: 10px 0;
+    border-bottom: 2px dotted #e7f0f6;
+    margin-bottom: 10px;
+}
+
+.post-input-form input {
+    width: 100%;
+    border: 0;
+    background: none;
+}
+
+.post-input-form textarea {
+    height: 80px;
+    width: 100%;
+    border: 0;
+    background: none;
 }
 
 /* --------------------------------------------

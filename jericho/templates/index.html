@@ -9,6 +9,7 @@
 {% block body-content %}
     <div class="header-section-wrapper">
         <div class="header-section">
+            <div class="k-logo"></div>
             <div class="hero-wrapper">
                 <img class="hero-image" src="{{ MEDIA_URL }}images/test-two-row.png" alt="" />
             </div>
@@ -38,11 +39,27 @@
                                 <li class="grid-column">{% now "m/d/Y" %}</li>
                             </ul>
                         </div>
-                        <ul class="post-options grid-center">
-                            <li class="grid-column-center"><a href="#">edit</a></li>
-                            <li class="grid-column-center"><a href="#">delete</a></li>
-                            <li class="grid-column-center"><a href="#">comment</a></li>
+                        <ul class="post-actions grid-center">
+                            <li class="grid-column-inline"><a href="#">edit</a></li>
+                            <li class="grid-column-inline"><a href="#">delete</a></li>
+                            <li class="grid-column-inline"><a href="#">comment</a></li>
                         </ul>
+                        <form class="post-input-form">
+                            <fieldset>
+                                <ul class="forms">
+                                    <li class="post-author-wrapper">
+                                        <input name="post-author" placeholder="Who are you?" />
+                                    </li>
+                                    <li>
+                                        <textarea name="post-description" placeholder="What do you have to say?"></textarea>
+                                    </li>
+                                </ul>
+                                <ul class="post-actions grid-right">
+                                    <li class="grid-column-inline"><a href="#">submit</a></li>
+                                    <li class="grid-column-inline"><a href="#">cancel</a></li>
+                                </ul>
+                            </fieldset>
+                        </form>
                     </div>
                     <div class="post-container">
                         <div class="post-original">
