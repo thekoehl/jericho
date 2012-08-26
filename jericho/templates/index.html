@@ -11,7 +11,7 @@
         <div class="header-section">
             <div class="k-logo"></div>
             <div class="hero-wrapper">
-                <img class="hero-image" src="{{ MEDIA_URL }}images/test-two-row.png" alt="" />
+                <img class="hero-image" src="{{ starting_post.image.image.url }}" alt="" />
             </div>
         </div>
     </div>
@@ -21,67 +21,54 @@
             <div class="content-header-description">"A witty remark"</div>
             <ul class="grid">
                 <li class="grid-column size-3of4">
-                    <div class="post-container activity">
-                        <div class="post-original">
-                            <ul class="post-header grid">
-                                <li class="date grid-column">
-                                    <div class="month">08</div>
-                                    <div class="day">24</div>
-                                    <div class="year">12</div>
-                                </li>
-                                <li class="title grid-column">This is a post title</li>
-                                <li class="author grid-column-right">by Gary</li>
-                            </ul>
-                            <p class="description">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                            <ul class="meta grid">
-                                <li class="grid-column">{% now "m/d/Y" %}</li>
-                            </ul>
-                        </div>
-                        <ul class="post-actions grid-center">
-                            <li class="grid-column-inline"><a href="#">edit</a></li>
-                            <li class="grid-column-inline"><a href="#">delete</a></li>
-                            <li class="grid-column-inline"><a href="#">comment</a></li>
-                        </ul>
-                        <form class="post-input-form">
-                            <fieldset>
-                                <ul class="forms">
-                                    <li class="post-author-wrapper">
-                                        <input name="post-author" placeholder="Who are you?" />
+                    {% for post in posts %}
+                        <div class="post-container activity">
+                            <div class="post-original">
+                                <ul class="post-header grid">
+                                    <li class="date grid-column">
+                                        <div class="month">
+                                            {{ post.added_date|date:"m" }}
+                                        </div>
+                                        <div class="day">
+                                            {{ post.added_date|date:"d" }}
+                                        </div>
+                                        <div class="year">
+                                            {{ post.added_date|date:"y" }}
+                                        </div>
                                     </li>
-                                    <li>
-                                        <textarea name="post-description" placeholder="What do you have to say?"></textarea>
-                                    </li>
+                                    <li class="title grid-column">{{ post.name }}</li>
+                                    <li class="author grid-column-right">by {{ post.creator }}</li>
                                 </ul>
-                                <ul class="post-actions grid-right">
-                                    <li class="grid-column-inline"><a href="#">submit</a></li>
-                                    <li class="grid-column-inline"><a href="#">cancel</a></li>
+                                <p class="description">
+                                    {{ post.description }}
+                                </p>
+                                <ul class="meta grid">
+                                    <li class="grid-column">{{ post.added_date|date:"m/d/Y" }}</li>
                                 </ul>
-                            </fieldset>
-                        </form>
-                    </div>
-                    <div class="post-container">
-                        <div class="post-original">
-                            <ul class="post-header grid">
-                                <li class="date grid-column">
-                                    <div class="month">08</div>
-                                    <div class="day">24</div>
-                                    <div class="year">12</div>
-                                </li>
-                                <li class="title grid-column">This is a post title</li>
-                                <li class="author grid-column-right">by Gary</li>
+                            </div>
+                            <ul class="post-actions grid-center">
+                                <li class="grid-column-inline"><a href="#">edit</a></li>
+                                <li class="grid-column-inline"><a href="#">delete</a></li>
+                                <li class="grid-column-inline"><a href="#">comment</a></li>
                             </ul>
-                            <p class="description">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                            <ul class="meta grid">
-                                <li class="grid-column">{% now "m/d/Y" %}</li>
-                            </ul>
+                            <form class="post-input-form">
+                                <fieldset>
+                                    <ul class="forms">
+                                        <li class="post-author-wrapper">
+                                            <input name="post-author" placeholder="Who are you?" />
+                                        </li>
+                                        <li>
+                                            <textarea name="post-description" placeholder="What do you have to say?"></textarea>
+                                        </li>
+                                    </ul>
+                                    <ul class="post-actions grid-right">
+                                        <li class="grid-column-inline"><a href="#">submit</a></li>
+                                        <li class="grid-column-inline"><a href="#">cancel</a></li>
+                                    </ul>
+                                </fieldset>
+                            </form>
                         </div>
-                        <div class="post-activity">
-                        </div>
-                    </div>
+                    {% endfor %}
                 </li>
                 <li class="grid-column size-1of4">
                     <div class="sidebar rounded-corners">

@@ -8,10 +8,8 @@ class Image(models.Model):
     added_date = models.DateField()
     last_updated_date = models.DateField()
 
-    # def upload_to_name(instance, filename):
-    #     filename = datetime.utcnow()
-    #     filename.strftime("%Y_%m_%d_%H_%M_%S_%f")
-    #     return 'images/%s' % (filename)
+    def __unicode__(self):
+        return u'%s: %s' % (self.added_date, self.name)
 
 class Post(models.Model):
     name = models.CharField(max_length=30)
@@ -21,9 +19,16 @@ class Post(models.Model):
     added_date = models.DateField()
     last_updated_date = models.DateField()
 
+    def __unicode__(self):
+        return u'%s: %s' % (self.added_date, self.name)
+
 class Comment(models.Model):
     name = models.CharField(max_length=30)
     creator = models.ForeignKey(User)
+    post = models.ForeignKey(Post)
     description = models.TextField()
     added_date = models.DateField()
     last_updated_date = models.DateField()
+
+    def __unicode__(self):
+        return u'%s: %s' % (self.added_date, self.name)
