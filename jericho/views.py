@@ -9,17 +9,23 @@ from jericho.models import Post, SiteMessaging
 import urllib
 import urllib2
 
-def index(request):
+def index(request, post_id):
     try:
         site_messaging = SiteMessaging.objects.filter(active=True).order_by('-id')[0]
     except IndexError:
         site_messaging = None
 
     try:
-        starting_post = Post.objects.filter(image__isnull=False).order_by('-id')[0]
+        if (post_id):
+            starting_post = Post.objects.get(pk=post_id)
+        else:
+            starting_post = Post.objects.filter(image__isnull=False).order_by('-id')[0]
         header_height = starting_post.image.image.height + 85
     except IndexError:
         starting_post = None
 
-    posts = Post.objects.order_by('-added_datetime')
+    if (post_id):
+        posts = Post.objects.filter(pk__gt=post_id).order_by('-added_datetime')
+    else:
+        posts = Post.objects.order_by('-added_datetime')
     return render_to_response('index.html', locals(), RequestContext(request))
