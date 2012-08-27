@@ -115,7 +115,7 @@ Header Section
 .header-section-wrapper {
     background: #f0f0f0;
     /*background: #0d0d21 url('../images/star-background.png') top left repeat;*/
-    height: 530px;
+    /*height: 530px;*/
     width: 100%;
     position: fixed;
     top: 0;
@@ -161,7 +161,7 @@ Content Section
 ----------------------------------------------- */
 .content-section-wrapper {
     width: 100%;
-    margin-top: 530px;
+    /*margin-top: 530px;*/
     padding: 40px 0 80px;
     border-top: 2px solid #b3b3b3;
     border-bottom: 2px solid #3765AF;
@@ -175,14 +175,17 @@ Content Section
     margin: 0 auto;
 }
 
-.content-header {
-    padding-bottom: 5px;
+.site-messaging-container {
+    padding-bottom: 40px;
+}
+
+.site-messaging-header {
     font-size: 25px;
     text-align: center;
 }
 
-.content-header-description {
-    padding-bottom: 40px;
+.site-messaging-description {
+    padding-top: 5px;
     color: #b3b3b3;
     font-weight: 300;
     text-align: center;
@@ -217,7 +220,7 @@ Sidebar
 Post
 ----------------------------------------------- */
 .post-container {
-    padding: 0 20px;
+    padding: 2px 22px 0;
     margin-bottom: 20px;
     color: #111;
 }
@@ -225,7 +228,7 @@ Post
 .post-original .post-header {
     height: 40px;
     /*padding: 0 10px;*/
-    border: 2px dotted #e7f0f6;
+    border-bottom: 2px dotted #e7f0f6;
     border-width: 2px 0;
     margin-bottom: 10px;
     line-height: 40px;
@@ -233,11 +236,6 @@ Post
     font-size: 18px;
     font-weight: 300;
     overflow: hidden;
-}
-
-.post-original .date {
-    padding: 1px 10px 0 0;
-    font: normal 10px Courier, sans-serif;
 }
 
 .post-original .title {
@@ -255,6 +253,7 @@ Post
 }
 
 .post-original .meta {
+    padding-bottom: 22px;
     color: #b3b3b3;
     font-size: 11px;
     font-weight: 300;
@@ -264,20 +263,32 @@ Post
 Post - Activity
 ----------------------------------------------- */
 .post-container.activity {
-    padding: 20px;
+    padding: 0 20px;
     background: #fcfcfc;
     border: 2px solid #e7f0f6;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     -khtml-border-radius: 8px;
     border-radius: 8px;
+    cursor: pointer;
+}
+
+.post-container .activity-container {
+    display: none;
+}
+
+.post-container.activity .activity-container {
+    display: block;
+}
+
+.post-container.activity .post-original .meta {
+    padding-bottom: 20px;
 }
 
 .post-actions {
     height: 30px;
     border: 1px dotted #e7f0f6;
     border-width: 2px 0;
-    margin: 10px 0 0;
     line-height: 30px;
 }
 
