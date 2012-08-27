@@ -7,15 +7,15 @@
 {% endblock %}
 
 {% block body-content %}
-    <div class="header-section-wrapper" style="height: {{ header_height }}px;">
+    <div id="header-section-wrapper" class="header-section-wrapper" style="height: {{ header_height }}px;">
         <div class="header-section">
-            <div class="k-logo" style="left: {{ logo_left }}px;"></div>
-            <div class="hero-wrapper" style="width: {{ hero_width }}px;">
-                <img class="hero-image" src="{{ starting_post.image.image.url }}" alt="" />
+            <div id="k-logo" class="k-logo" style="left: {{ logo_left }}px;"></div>
+            <div id="hero-wrapper" class="hero-wrapper" style="width: {{ hero_width }}px;">
+                <img id="hero-image" class="hero-image" src="{{ starting_post.image.image.url }}" alt="" />
             </div>
         </div>
     </div>
-    <div class="content-section-wrapper" style="margin-top: {{ header_height }}px;">
+    <div id="content-section-wrapper" class="content-section-wrapper" style="margin-top: {{ header_height }}px;">
         <div class="content-section" role="main">
             {% if site_messaging.name %}
             <div class="site-messaging-container">
@@ -44,6 +44,7 @@
                                 <ul class="meta grid">
                                     <li class="grid-column">{{ post.added_date|date:"m/d/Y" }}</li>
                                 </ul>
+                                <div class="hero-image" data-src="{{ post.image.image.url }}" data-height="{{ post.image.image.height }}" data-width="{{ post.image.image.width }}"></div>
                             </div>
                             <!--
                             <div class="activity-container">

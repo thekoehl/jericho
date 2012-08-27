@@ -54,6 +54,13 @@ jericho.Main = function() {
  */
 jericho.Main.prototype.initDomElements = function() {
     this.postContainerElements = goog.dom.getElementsByClass('post-container');
+    this.headerSectionWrapperElement =
+        goog.dom.getElement('header-section-wrapper');
+    this.kLogoElement = goog.dom.getElement('k-logo');
+    this.heroWrapperElement = goog.dom.getElement('hero-wrapper');
+    this.heroImageElement = goog.dom.getElement('hero-image');
+    this.contentSectionWrapperElement =
+        goog.dom.getElement('content-section-wrapper');
 };
 
 /**
@@ -115,8 +122,7 @@ jericho.Main.prototype.postClickCallback = function(e) {
     //     goog.dom.getElementByClass('post-actions', e.currentTarget);
 
     // goog.style.setStyle(postActionsElement, 'display', 'block');
-    var postId = e.currentTarget.getAttribute('data-id');
-    this.selectPost(postId);
+    this.selectPost(e.currentTarget);
 };
 
 /**
@@ -174,10 +180,12 @@ jericho.Main.prototype.removeClass = function(element, className) {
 };
 
 /**
- * Select a given post from the postId.
- * @param {number} postId This is the id of the post to select.
+ * Select a given post from the post container.
+ * @param {element} container The post container.
  */
-jericho.Main.prototype.selectPost = function(postId) {
+jericho.Main.prototype.selectPost = function(container) {
+    var postId = container.getAttribute('data-id');
+
     // var slideFromAnimation = new goog.fx.dom.SlideFrom(
     //     agad.cslider,
     //     [activePos, 5],
@@ -188,6 +196,38 @@ jericho.Main.prototype.selectPost = function(postId) {
     // Scroll selected post to the top
     // Show the correct amount of posts underneath
     // Update hero image
+    var heroImageNewElement = goog.dom.getElementByClass('hero-image', container);
+    var heroImage = {
+        'src': heroImageNewElement.getAttribute('data-src'),
+        'height': heroImageNewElement.getAttribute('data-height'),
+        'width': heroImageNewElement.getAttribute('data-width')
+    };
+    var headerHeight = (parseInt(heroImage.height) + 85);
+    var headerWidth = parseInt(heroImage.width);
+    var logoLeft = (((1070 - parseInt(heroImage.width)) / 2) - 94 - 40);
+
+    goog.style.setStyle(
+        this.headerSectionWrapperElement,
+        'height',
+        headerHeight + 'px'
+    );
+    goog.style.setStyle(
+        this.kLogoElement,
+        'left',
+        logoLeft + 'px'
+    );
+    goog.style.setStyle(
+        this.heroWrapperElement,
+        'width',
+        headerWidth + 'px'
+    );
+    this.heroImageElement.src = heroImage.src;
+    goog.style.setStyle(
+        this.contentSectionWrapperElement,
+        'margin-top',
+        headerHeight + 'px'
+    );
+
     // Update previous / next page buttons
 };
 

@@ -254,6 +254,10 @@ Post
     font-weight: 300;
 }
 
+.post-original .hero-image {
+    display: none;
+}
+
 /* --------------------------------------------
 Post - Activity
 ----------------------------------------------- */
