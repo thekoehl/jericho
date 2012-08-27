@@ -27,7 +27,7 @@ def index(request, post_id=1):
         starting_post = None
 
     if (post_id):
-        posts = Post.objects.filter(pk__gt=post_id).order_by('-added_datetime')
+        posts = Post.objects.filter(pk__gte=post_id).order_by('-added_datetime')
     else:
         posts = Post.objects.order_by('-added_datetime')
     return render_to_response('index.html', locals(), RequestContext(request))
