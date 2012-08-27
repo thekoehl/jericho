@@ -178,6 +178,13 @@ jericho.Main.prototype.removeClass = function(element, className) {
  * @param {number} postId This is the id of the post to select.
  */
 jericho.Main.prototype.selectPost = function(postId) {
+    // var slideFromAnimation = new goog.fx.dom.SlideFrom(
+    //     agad.cslider,
+    //     [activePos, 5],
+    //     agad.CHANGE_QUESTION_SPEED,
+    //     goog.fx.easing.easeOut
+    // );
+    // slideFromAnimation.play();
     // Scroll selected post to the top
     // Show the correct amount of posts underneath
     // Update hero image
