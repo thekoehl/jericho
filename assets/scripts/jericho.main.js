@@ -57,6 +57,7 @@ jericho.Main.prototype.initDomElements = function() {
     this.headerSectionWrapperElement =
         goog.dom.getElement('header-section-wrapper');
     this.kLogoElement = goog.dom.getElement('k-logo');
+    this.heroOverlayElement = goog.dom.getElement('hero-overlay');
     this.heroWrapperElement = goog.dom.getElement('hero-wrapper');
     this.heroImageElement = goog.dom.getElement('hero-image');
     this.contentSectionWrapperElement =
@@ -84,6 +85,22 @@ jericho.Main.prototype.assignHandlers = function() {
     //     this
     // );
 
+    goog.events.listen(
+        this.heroWrapperElement,
+        goog.events.EventType.MOUSEOVER,
+        this.heroMouseoverCallback,
+        false,
+        this
+    );
+
+    goog.events.listen(
+        this.heroWrapperElement,
+        goog.events.EventType.MOUSEOUT,
+        this.heroMouseoutCallback,
+        false,
+        this
+    );
+
     length = this.postContainerElements.length;
     for (index = 0; index < length; index++) {
         goog.events.listen(
@@ -110,6 +127,24 @@ jericho.Main.prototype.assignHandlers = function() {
             this
         );
     }
+};
+
+/**
+ * The callback when the hero wrapper has a mouse over event.
+ * @param {goog.events.BrowserEvent} e The event fired.
+ */
+jericho.Main.prototype.heroMouseoverCallback = function(e) {
+    console.log('mouseover', e);
+    goog.style.setStyle(this.heroWrapperElement, 'display', 'block');
+};
+
+/**
+ * The callback when the hero wrapper has a mouse out event.
+ * @param {goog.events.BrowserEvent} e The event fired.
+ */
+jericho.Main.prototype.heroMouseoutCallback = function(e) {
+    console.log('mouseout', e);
+    goog.style.setStyle(this.heroWrapperElement, 'display', 'none');
 };
 
 /**
@@ -198,14 +233,16 @@ jericho.Main.prototype.selectPost = function(container) {
     // Update hero image
     var heroImageNewElement = goog.dom.getElementByClass('hero-image', container);
     var heroImage = {
+        'name': heroImageNewElement.getAttribute('data-name'),
         'src': heroImageNewElement.getAttribute('data-src'),
         'height': heroImageNewElement.getAttribute('data-height'),
         'width': heroImageNewElement.getAttribute('data-width')
     };
     var headerHeight = (parseInt(heroImage.height) + 85);
     var headerWidth = parseInt(heroImage.width);
-    var logoLeft = (((1070 - parseInt(heroImage.width)) / 2) - 94 - 40);
-
+    var logoPadding = (((1070 - parseInt(heroImage.width)) / 2) - 94 - 40);
+    var heroOverlayPadding =
+        (((1070 - parseInt(heroImage.width)) / 2) - 40);
     goog.style.setStyle(
         this.headerSectionWrapperElement,
         'height',
@@ -214,19 +251,25 @@ jericho.Main.prototype.selectPost = function(container) {
     goog.style.setStyle(
         this.kLogoElement,
         'left',
-        logoLeft + 'px'
+        logoPadding + 'px'
+    );
+    goog.style.setStyle(
+        this.heroOverlayElement,
+        'right',
+        heroOverlayPadding + 'px'
     );
     goog.style.setStyle(
         this.heroWrapperElement,
         'width',
         headerWidth + 'px'
     );
-    this.heroImageElement.src = heroImage.src;
     goog.style.setStyle(
         this.contentSectionWrapperElement,
         'margin-top',
         headerHeight + 'px'
     );
+    this.heroOverlayElement.innerHTML = heroImage.name;
+    this.heroImageElement.src = heroImage.src;
 
     // Update previous / next page buttons
 };

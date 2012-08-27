@@ -23,7 +23,8 @@ def index(request, post_id=0):
         header_height = starting_post.image.image.height + 85
         hero_width = starting_post.image.image.width
         # div margin - logo width - div padding
-        logo_left = ((1070 - starting_post.image.image.width) / 2) - 94 - 40
+        logo_padding = ((1070 - starting_post.image.image.width) / 2) - 94 - 40
+        header_overlay_padding = ((1070 - starting_post.image.image.width) / 2) - 40
     except IndexError:
         starting_post = None
     except Post.DoesNotExist:
