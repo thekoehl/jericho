@@ -62,6 +62,8 @@ jericho.Main.prototype.initDomElements = function() {
     this.heroImageElement = goog.dom.getElement('hero-image');
     this.previousPageElement = goog.dom.getElement('previous-page');
     this.nextPageElement = goog.dom.getElement('next-page');
+    this.postSearchFormElement = goog.dom.getElement('post-search-form');
+    this.postSearchElement = goog.dom.getElement('post-search');
     this.contentSectionWrapperElement =
         goog.dom.getElement('content-section-wrapper');
 };
