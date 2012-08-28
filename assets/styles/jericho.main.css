@@ -246,6 +246,7 @@ Actions Container
     border: 1px dotted #e7f0f6;
     border-width: 2px 0;
     line-height: 30px;
+    color: #e7f0f6;
 }
 
 .actions-container.outside {

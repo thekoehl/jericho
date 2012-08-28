@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load markup %}
+{% block title %}Jericho{% endblock %}
 {% block head-scripts %}
     <!-- SRC -->
     <script type="text/javascript" src="{{ MEDIA_URL }}scripts/closure-library/closure/goog/base.js"></script>
@@ -35,10 +36,18 @@
                 <li class="grid-column size-3of4">
                     <ul class="actions-container outside grid">
                         <li class="grid-column">
-                            <a id="previous-page" class="previous-page" href="#">Previous Page</a>
+                            {% if starting_post.get_previous_id %}
+                                <a id="previous-page" class="previous-page" href="/{{ starting_post.get_previous_id }}">Previous Page</a>
+                            {% else %}
+                                Previous Page
+                            {% endif %}
                         </li>
                         <li class="grid-column-right">
-                            <a id="next-page" class="next-page" href="#">Next Page</a>
+                            {% if starting_post.get_next_id %}
+                                <a id="next-page" class="next-page" href="/{{ starting_post.get_next_id }}">Next Page</a>
+                            {% else %}
+                                Next Page
+                            {% endif %}
                         </li>
                     </ul>
                 </li>
