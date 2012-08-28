@@ -12,6 +12,9 @@ urlpatterns = patterns('',
     # url(r'^jericho/', include('jericho.foo.urls')),
     url(r'^$', 'jericho.views.index', name='home'),
     url(r'^(?P<post_id>\d+)/$', 'jericho.views.index'),
+    url(r'^list/(?P<post_id>\d+)$', 'jericho.views.list'),
+    url(r'^show/(?P<post_id>\d+)$', 'jericho.views.show'),
+    url(r'^comments/', include('django.contrib.comments.urls')),
     # url(r'^search/', include('haystack.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

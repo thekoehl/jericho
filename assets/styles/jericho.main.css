@@ -110,6 +110,50 @@ body {
     width: 75%;
 }
 
+.size-1of5 {
+    width: 15%;
+}
+
+.size-4of5 {
+    width: 85%;
+}
+
+/* --------------------------------------------------------------------
+Object - Media Block
+----------------------------------------------------------------------- */
+.media {
+    overflow: hidden;
+}
+
+.img {
+    overflow: hidden;
+}
+
+.media .img {
+    float: left;
+    margin: 0 16px 0px 0;
+}
+
+.media.flip .img {
+    float: right;
+    margin: 0 0 0 16px;
+}
+
+.media.stack .img {
+    float: none;
+    margin: 0 0 16px 0;
+}
+
+.media.nowrap .media-body {
+    overflow: hidden;
+    zoom: 1;
+}
+
+.media .img img {
+    display: block;
+}
+
+
 /* --------------------------------------------
 Header Section
 ----------------------------------------------- */
@@ -293,6 +337,87 @@ Search Form
 }
 
 /* --------------------------------------------
+List Item
+----------------------------------------------- */
+.list-size-column1-1 {
+    width: 80px;
+}
+
+.list-size-column1-2 {
+    width: 678px;
+}
+
+.list-size-column2-1 {
+    width: 70px;
+}
+
+.list-size-column2-2 {
+    width: 608px;
+}
+
+.list-item-container {
+    height: 60px;
+    padding: 10px 22px;
+    /*border: 2px solid #e7f0f6;*/
+    margin-bottom: 5px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.list-item-container.active {
+    padding: 8px 20px;
+    border: 2px solid #e7f0f6;
+    background: #fcfcfc;
+}
+
+.list-item-container .list-item-header {
+    height: 30px;
+    /*padding: 0 10px;*/
+    border-bottom: 2px dotted #e7f0f6;
+    border-width: 2px 0;
+    line-height: 30px;
+    color: #3765AF;
+    font-size: 14px;
+    font-weight: 300;
+    overflow: hidden;
+}
+
+.list-item-date-container {
+    /*text-align: center;*/
+    font-weight: bold;
+    color: #b3b3b3;
+}
+
+.list-item-date-container .date {
+    padding: 7px 0 5px;
+    font-size: 24px;
+}
+
+.list-item-date-container .time {
+    font-size: 16px;
+}
+
+.list-item-thumbnail {
+}
+
+.list-item-header .title {
+
+}
+
+.list-item-header .author {
+}
+
+.list-item-meta {
+    height: 28px;
+    color: #b3b3b3;
+    line-height: 28px;
+    font-size: 11px;
+    font-weight: 300;
+}
+
+/* --------------------------------------------
 Post
 ----------------------------------------------- */
 .post-container {
@@ -350,7 +475,6 @@ Post - Activity
     -webkit-border-radius: 8px;
     -khtml-border-radius: 8px;
     border-radius: 8px;
-    cursor: pointer;
 }
 
 .post-container .activity-container {

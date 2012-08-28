@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 
 class Image(models.Model):
     name = models.CharField(max_length=30)
@@ -19,6 +20,8 @@ class Post(models.Model):
     added_datetime = models.DateTimeField(auto_now_add=True)
     last_updated_datetime = models.DateTimeField(auto_now=True)
 
+    tags = TaggableManager()
+
     def __unicode__(self):
         return u'%s: %s' % (self.added_datetime, self.name)
 
@@ -30,41 +33,6 @@ class Post(models.Model):
 
     def get_previous(self):
         previous = Post.objects.filter(id__lt=self.id).order_by('-added_datetime')
-        if previous:
-            return previous[0]
-        return False
-
-    def get_next_id(self):
-        next = self.get_next()
-        if next:
-            return next.id
-        return False
-
-    def get_previous_id(self):
-        previous = self.get_previous()
-        if previous:
-            return previous.id
-        return False
-
-class Comment(models.Model):
-    name = models.CharField(max_length=30)
-    creator = models.ForeignKey(User)
-    post = models.ForeignKey(Post)
-    description = models.TextField()
-    added_datetime = models.DateTimeField(auto_now_add=True)
-    last_updated_datetime = models.DateTimeField(auto_now=True)
-
-    def __unicode__(self):
-        return u'%s: %s' % (self.added_datetime, self.name)
-
-    def get_next(self):
-        next = Comment.objects.filter(id__gt=self.id).order_by('added_datetime')
-        if next:
-            return next[0]
-        return False
-
-    def get_previous(self):
-        previous = Comment.objects.filter(id__lt=self.id).order_by('-added_datetime')
         if previous:
             return previous[0]
         return False
