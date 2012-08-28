@@ -85,21 +85,21 @@ jericho.Main.prototype.assignHandlers = function() {
     //     this
     // );
 
-    goog.events.listen(
-        this.heroWrapperElement,
-        goog.events.EventType.MOUSEOVER,
-        this.heroMouseoverCallback,
-        false,
-        this
-    );
+    // goog.events.listen(
+    //     this.heroWrapperElement,
+    //     goog.events.EventType.MOUSEOVER,
+    //     this.heroMouseoverCallback,
+    //     false,
+    //     this
+    // );
 
-    goog.events.listen(
-        this.heroWrapperElement,
-        goog.events.EventType.MOUSEOUT,
-        this.heroMouseoutCallback,
-        false,
-        this
-    );
+    // goog.events.listen(
+    //     this.heroWrapperElement,
+    //     goog.events.EventType.MOUSEOUT,
+    //     this.heroMouseoutCallback,
+    //     false,
+    //     this
+    // );
 
     length = this.postContainerElements.length;
     for (index = 0; index < length; index++) {
@@ -135,7 +135,7 @@ jericho.Main.prototype.assignHandlers = function() {
  */
 jericho.Main.prototype.heroMouseoverCallback = function(e) {
     console.log('mouseover', e);
-    goog.style.setStyle(this.heroWrapperElement, 'display', 'block');
+    goog.style.setStyle(this.heroOverlayElement, 'display', 'block');
 };
 
 /**
@@ -144,7 +144,7 @@ jericho.Main.prototype.heroMouseoverCallback = function(e) {
  */
 jericho.Main.prototype.heroMouseoutCallback = function(e) {
     console.log('mouseout', e);
-    goog.style.setStyle(this.heroWrapperElement, 'display', 'none');
+    goog.style.setStyle(this.heroOverlayElement, 'display', 'none');
 };
 
 /**
@@ -253,11 +253,11 @@ jericho.Main.prototype.selectPost = function(container) {
         'left',
         logoPadding + 'px'
     );
-    goog.style.setStyle(
-        this.heroOverlayElement,
-        'right',
-        heroOverlayPadding + 'px'
-    );
+    // goog.style.setStyle(
+    //     this.heroOverlayElement,
+    //     'right',
+    //     heroOverlayPadding + 'px'
+    // );
     goog.style.setStyle(
         this.heroWrapperElement,
         'width',
@@ -268,7 +268,7 @@ jericho.Main.prototype.selectPost = function(container) {
         'margin-top',
         headerHeight + 'px'
     );
-    this.heroOverlayElement.innerHTML = heroImage.name;
+    // this.heroOverlayElement.innerHTML = heroImage.name;
     this.heroImageElement.src = heroImage.src;
 
     // Update previous / next page buttons
