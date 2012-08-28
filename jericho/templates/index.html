@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load markup %}
 {% block head-scripts %}
     <!-- SRC -->
     <script type="text/javascript" src="{{ MEDIA_URL }}scripts/closure-library/closure/goog/base.js"></script>
@@ -59,15 +60,15 @@
             <ul class="grid">
                 <li class="grid-column size-3of4">
                     {% for post in posts %}
-                        <div class="post-container" data-id="{{ post.id }}">
+                        <div class="post-container" data-id="{{ post.id }}" data-previous-id="{{ post.get_previous_id }}" data-next-id="{{ post.get_next_id }}">
                             <div class="post-original">
                                 <ul class="post-header grid">
                                     <li class="title grid-column">{{ post.name }}</li>
                                     <li class="author grid-column-right">by {{ post.creator }}</li>
                                 </ul>
-                                <p class="description">
-                                    {{ post.description }}
-                                </p>
+                                <div class="description markdown">
+                                    {{ post.description|markdown }}
+                                </div>
                                 <ul class="meta grid">
                                     <li class="grid-column">{{ post.added_datetime|date:"m/d/Y h:iA" }}</li>
                                 </ul>

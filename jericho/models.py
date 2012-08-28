@@ -22,6 +22,30 @@ class Post(models.Model):
     def __unicode__(self):
         return u'%s: %s' % (self.added_datetime, self.name)
 
+    def get_next(self):
+        next = Post.objects.filter(id__gt=self.id).order_by('added_datetime')
+        if next:
+            return next[0]
+        return False
+
+    def get_previous(self):
+        previous = Post.objects.filter(id__lt=self.id).order_by('-added_datetime')
+        if previous:
+            return previous[0]
+        return False
+
+    def get_next_id(self):
+        next = self.get_next()
+        if next:
+            return next.id
+        return False
+
+    def get_previous_id(self):
+        previous = self.get_previous()
+        if previous:
+            return previous.id
+        return False
+
 class Comment(models.Model):
     name = models.CharField(max_length=30)
     creator = models.ForeignKey(User)
@@ -32,6 +56,30 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return u'%s: %s' % (self.added_datetime, self.name)
+
+    def get_next(self):
+        next = Comment.objects.filter(id__gt=self.id).order_by('added_datetime')
+        if next:
+            return next[0]
+        return False
+
+    def get_previous(self):
+        previous = Comment.objects.filter(id__lt=self.id).order_by('-added_datetime')
+        if previous:
+            return previous[0]
+        return False
+
+    def get_next_id(self):
+        next = self.get_next()
+        if next:
+            return next.id
+        return False
+
+    def get_previous_id(self):
+        previous = self.get_previous()
+        if previous:
+            return previous.id
+        return False
 
 class SiteMessaging(models.Model):
     name = models.CharField(max_length=100)
