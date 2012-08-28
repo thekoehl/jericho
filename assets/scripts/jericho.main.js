@@ -60,6 +60,8 @@ jericho.Main.prototype.initDomElements = function() {
     this.heroOverlayElement = goog.dom.getElement('hero-overlay');
     this.heroWrapperElement = goog.dom.getElement('hero-wrapper');
     this.heroImageElement = goog.dom.getElement('hero-image');
+    this.previousPageElement = goog.dom.getElement('previous-page');
+    this.nextPageElement = goog.dom.getElement('next-page');
     this.contentSectionWrapperElement =
         goog.dom.getElement('content-section-wrapper');
 };
@@ -100,6 +102,22 @@ jericho.Main.prototype.assignHandlers = function() {
     //     false,
     //     this
     // );
+
+    goog.events.listen(
+        this.previousPageElement,
+        goog.events.EventType.CLICK,
+        this.previousPageCallback,
+        false,
+        this
+    );
+
+    goog.events.listen(
+        this.nextPageElement,
+        goog.events.EventType.CLICK,
+        this.nextPageCallback,
+        false,
+        this
+    );
 
     length = this.postContainerElements.length;
     for (index = 0; index < length; index++) {
@@ -145,6 +163,22 @@ jericho.Main.prototype.heroMouseoverCallback = function(e) {
 jericho.Main.prototype.heroMouseoutCallback = function(e) {
     console.log('mouseout', e);
     goog.style.setStyle(this.heroOverlayElement, 'display', 'none');
+};
+
+/**
+ * The callback for the previous page click event.
+ * @param {goog.events.BrowserEvent} e The event fired.
+ */
+jericho.Main.prototype.previousPageCallback = function(e) {
+
+};
+
+/**
+ * The callback for the next page click event.
+ * @param {goog.events.BrowserEvent} e The event fired.
+ */
+jericho.Main.prototype.nextPageCallback = function(e) {
+
 };
 
 /**

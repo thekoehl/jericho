@@ -232,6 +232,46 @@ Sidebar
 }
 
 /* --------------------------------------------
+Actions Container
+----------------------------------------------- */
+.actions-container {
+    height: 30px;
+    border: 1px dotted #e7f0f6;
+    border-width: 2px 0;
+    line-height: 30px;
+}
+
+.actions-container.outside {
+    height: 20px;
+    border-width: 2px 0;
+    margin: 0 20px 10px;
+    line-height: 20px;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.actions-container.outside.right {
+    margin: 0 0 10px 20px;
+}
+
+.actions-container a {
+    color: #b3b3b3;
+    text-decoration: none;
+}
+
+.actions-container a:hover {
+    color: #3765AF;
+}
+
+.actions-container li {
+    padding-left: 10px;
+}
+
+.actions-container li:first-child {
+    padding-left: 0;
+}
+
+/* --------------------------------------------
 Post
 ----------------------------------------------- */
 .post-container {
@@ -302,26 +342,6 @@ Post - Activity
 
 .post-container.activity .post-original .meta {
     padding-bottom: 20px;
-}
-
-.post-actions {
-    height: 30px;
-    border: 1px dotted #e7f0f6;
-    border-width: 2px 0;
-    line-height: 30px;
-}
-
-.post-actions a {
-    color: #b3b3b3;
-    text-decoration: none;
-}
-
-.post-actions li {
-    padding-left: 10px;
-}
-
-.post-actions li:first-child {
-    padding-left: 0;
 }
 
 .post-author-wrapper {

@@ -32,6 +32,25 @@
             {% endif %}
             <ul class="grid">
                 <li class="grid-column size-3of4">
+                    <ul class="actions-container outside grid">
+                        <li class="grid-column">
+                            <a id="previous-page" class="previous-page" href="#">Previous Page</a>
+                        </li>
+                        <li class="grid-column-right">
+                            <a id="next-page" class="next-page" href="#">Next Page</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="grid-column size-1of4">
+                    <ul class="actions-container outside right grid-center">
+                        <li class="grid-column-inline">
+                            <a href="#">Action</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="grid">
+                <li class="grid-column size-3of4">
                     {% for post in posts %}
                         <div class="post-container" data-id="{{ post.id }}">
                             <div class="post-original">
@@ -49,7 +68,7 @@
                             </div>
                             <!--
                             <div class="activity-container">
-                                <ul class="post-actions grid-center">
+                                <ul class="actions-container grid-center">
                                     <li class="grid-column-inline"><a href="#">edit</a></li>
                                     <li class="grid-column-inline"><a href="#">delete</a></li>
                                     <li class="grid-column-inline"><a href="#">comment</a></li>
@@ -64,7 +83,7 @@
                                                 <textarea name="post-description" placeholder="What do you have to say?"></textarea>
                                             </li>
                                         </ul>
-                                        <ul class="post-actions grid-right">
+                                        <ul class="actions-container grid-right">
                                             <li class="grid-column-inline"><a href="#">submit</a></li>
                                             <li class="grid-column-inline"><a href="#">cancel</a></li>
                                         </ul>
