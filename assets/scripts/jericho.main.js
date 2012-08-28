@@ -105,21 +105,25 @@ jericho.Main.prototype.assignHandlers = function() {
     //     this
     // );
 
-    goog.events.listen(
-        this.previousPageElement,
-        goog.events.EventType.CLICK,
-        this.previousPageCallback,
-        false,
-        this
-    );
+    if (this.previousPageElement != null) {
+        goog.events.listen(
+            this.previousPageElement,
+            goog.events.EventType.CLICK,
+            this.previousPageCallback,
+            false,
+            this
+        );
+    }
 
-    goog.events.listen(
-        this.nextPageElement,
-        goog.events.EventType.CLICK,
-        this.nextPageCallback,
-        false,
-        this
-    );
+    if (this.nextPageElement != null) {
+        goog.events.listen(
+            this.nextPageElement,
+            goog.events.EventType.CLICK,
+            this.nextPageCallback,
+            false,
+            this
+        );
+    }
 
     length = this.postContainerElements.length;
     for (index = 0; index < length; index++) {
