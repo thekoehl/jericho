@@ -2,6 +2,7 @@ from django.template import Context, loader
 from django.http import HttpResponse
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
+from django.core.paginator import Paginator, InvalidPage
 
 from jericho.models import Post, SiteMessaging
 
@@ -64,3 +65,29 @@ def list(request, post_id=0):
 
 def show(request, post_id=0):
     return render_to_response('show.html', locals(), RequestContext(request))
+
+
+
+def list_test(request):
+    # Pull the data
+    post_list = Post.objects.all()
+
+    # Grab the first page of 100 items
+    paginator = Paginator(post_list, 100)
+    page_object = paginator.page(1)
+
+    return render_to_response('list-test.html', locals(), RequestContext(request))
+
+def list_json(request, page):
+    # Pull the data
+    post_list = Post.objects.all()
+
+    # Grab the first page of 100 items
+    paginator = Paginator(post_list, 100)
+    try:
+        page_object = paginator.page(page)
+    except InvalidPage:
+        # Return 404 if the page doesn't exist
+        raise Http404
+
+    return render_to_response('list-test.json', locals(), RequestContext(request), 'text/javascript')

@@ -1,0 +1,13 @@
+{
+    "page": {{ page_object.number }},
+    "hasNext": {{ page_object.has_next|lower }},
+    "itemList": [
+        {% for object in page_object.object_list %}
+        {
+            "string": "{{ object.pub_date|date:"U" }}:&nbsp;&nbsp;&nbsp;{{ object|truncatewords:10|escapejs }}",
+            "url": "{{ obj.url }}"
+        }
+        {% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ]
+}

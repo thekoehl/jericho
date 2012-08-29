@@ -348,11 +348,11 @@ List Item
 }
 
 .list-size-column2-1 {
-    width: 70px;
+    width: 608px;
 }
 
 .list-size-column2-2 {
-    width: 608px;
+    width: 60px;
 }
 
 .list-item-container {
@@ -366,7 +366,7 @@ List Item
     border-radius: 8px;
 }
 
-.list-item-container.active {
+.list-item-container.hover {
     padding: 8px 20px;
     border: 2px solid #e7f0f6;
     background: #fcfcfc;
@@ -391,7 +391,7 @@ List Item
 }
 
 .list-item-date-container .date {
-    padding: 7px 0 5px;
+    padding: 5px 0 7px;
     font-size: 24px;
 }
 
@@ -465,9 +465,9 @@ Post
 }
 
 /* --------------------------------------------
-Post - Activity
+Post - Hover
 ----------------------------------------------- */
-.post-container.activity {
+.post-container.hover {
     padding: 0 20px;
     background: #fcfcfc;
     border: 2px solid #e7f0f6;
@@ -481,11 +481,11 @@ Post - Activity
     display: none;
 }
 
-.post-container.activity .activity-container {
+.post-container.hover .activity-container {
     display: block;
 }
 
-.post-container.activity .post-original .meta {
+.post-container.hover .post-original .meta {
     padding-bottom: 20px;
 }
 

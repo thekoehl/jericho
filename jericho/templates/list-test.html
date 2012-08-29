@@ -43,7 +43,7 @@
             </ul>
             <ul class="grid">
                 <li class="grid-column size-3of4">
-                    {% for post in posts %}
+                    {% for post in page_object.object_list %}
                         <div class="list-item-container" data-id="{{ post.id }}">
                             <ul class="grid">
                                 <li class="grid-column list-item-date-container list-size-column1-1">
@@ -74,6 +74,7 @@
                             </ul>
                         </div>
                     {% endfor %}
+                    <div id="newtwitter-anchor"></div>
                 </li>
                 <li class="grid-column size-1of4">
                     {% include "partials/sidebar.html" %}

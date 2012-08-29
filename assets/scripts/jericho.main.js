@@ -54,6 +54,8 @@ jericho.Main = function() {
  */
 jericho.Main.prototype.initDomElements = function() {
     this.postContainerElements = goog.dom.getElementsByClass('post-container');
+    this.listItemContainerElements =
+        goog.dom.getElementsByClass('list-item-container');
     this.headerSectionWrapperElement =
         goog.dom.getElement('header-section-wrapper');
     this.kLogoElement = goog.dom.getElement('k-logo');
@@ -125,33 +127,63 @@ jericho.Main.prototype.assignHandlers = function() {
         );
     }
 
-    length = this.postContainerElements.length;
-    for (index = 0; index < length; index++) {
-        goog.events.listen(
-            this.postContainerElements[index],
-            goog.events.EventType.CLICK,
-            this.postClickCallback,
-            false,
-            this
-        );
+    if (this.postContainerElements != null) {
+        length = this.postContainerElements.length;
+        for (index = 0; index < length; index++) {
+            goog.events.listen(
+                this.postContainerElements[index],
+                goog.events.EventType.CLICK,
+                this.postClickCallback,
+                false,
+                this
+            );
 
-        goog.events.listen(
-            this.postContainerElements[index],
-            goog.events.EventType.MOUSEOVER,
-            this.postMouseoverCallback,
-            false,
-            this
-        );
+            goog.events.listen(
+                this.postContainerElements[index],
+                goog.events.EventType.MOUSEOVER,
+                this.itemMouseoverCallback,
+                false,
+                this
+            );
 
-        goog.events.listen(
-            this.postContainerElements[index],
-            goog.events.EventType.MOUSEOUT,
-            this.postMouseoutCallback,
-            false,
-            this
-        );
+            goog.events.listen(
+                this.postContainerElements[index],
+                goog.events.EventType.MOUSEOUT,
+                this.itemMouseoutCallback,
+                false,
+                this
+            );
+        }
     }
-};
+
+    if (this.listItemContainerElements != null) {
+        length = this.listItemContainerElements.length;
+        for (index = 0; index < length; index++) {
+            // goog.events.listen(
+            //     this.listItemContainerElements[index],
+            //     goog.events.EventType.CLICK,
+            //     this.listItemClickCallback,
+            //     false,
+            //     this
+            // );
+
+            goog.events.listen(
+                this.listItemContainerElements[index],
+                goog.events.EventType.MOUSEOVER,
+                this.itemMouseoverCallback,
+                false,
+                this
+            );
+
+            goog.events.listen(
+                this.listItemContainerElements[index],
+                goog.events.EventType.MOUSEOUT,
+                this.itemMouseoutCallback,
+                false,
+                this
+            );
+        }
+    }};
 
 /**
  * The callback when the hero wrapper has a mouse over event.
@@ -192,42 +224,23 @@ jericho.Main.prototype.nextPageCallback = function(e) {
  * @param {goog.events.BrowserEvent} e The event fired.
  */
 jericho.Main.prototype.postClickCallback = function(e) {
-    console.log('click', e);
-    // var postActionsElement =
-    //     goog.dom.getElementByClass('post-actions', e.currentTarget);
-
-    // goog.style.setStyle(postActionsElement, 'display', 'block');
     this.selectPost(e.currentTarget);
 };
 
 /**
- * The callback when a post has a mouse over event.
+ * The callback when an item has a mouse over event.
  * @param {goog.events.BrowserEvent} e The event fired.
  */
-jericho.Main.prototype.postMouseoverCallback = function(e) {
-    // console.log('mouseover', e);
-    // var postActionsElement =
-    //     goog.dom.getElementByClass('post-actions', e.currentTarget);
-
-    // goog.style.setStyle(postActionsElement, 'display', 'block');
-
-    this.addClass(e.currentTarget, 'activity');
+jericho.Main.prototype.itemMouseoverCallback = function(e) {
+    this.addClass(e.currentTarget, 'hover');
 };
 
 /**
- * The callback when a post has a mouse out event.
+ * The callback when an item has a mouse out event.
  * @param {goog.events.BrowserEvent} e The event fired.
  */
-jericho.Main.prototype.postMouseoutCallback = function(e) {
-    // console.log('mouseout', e);
-    // var postActionsElement =
-    //     goog.dom.getElementByClass('post-actions', e.currentTarget);
-    // var postInputFormElement =
-    //     goog.dom.getElementByClass('post-input-form', e.currentTarget);
-    // goog.style.setStyle(postActionsElement, 'display', 'none');
-    // goog.style.setStyle(postInputFormElement, 'display', 'none');
-
-    this.removeClass(e.currentTarget, 'activity');
+jericho.Main.prototype.itemMouseoutCallback = function(e) {
+    this.removeClass(e.currentTarget, 'hover');
 };
 
 /**
