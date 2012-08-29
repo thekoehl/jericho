@@ -12,6 +12,8 @@ class Image(models.Model):
     def __unicode__(self):
         return u'%s: %s' % (self.added_datetime, self.name)
 
+    tags = TaggableManager()
+
 class Post(models.Model):
     name = models.CharField(max_length=30)
     creator = models.ForeignKey(User)

@@ -29,6 +29,7 @@ goog.require('goog.fx.AnimationQueue');
 goog.require('goog.fx.dom');
 goog.require('goog.history.Html5History');
 goog.require('goog.net.cookies');
+goog.provide('goog.net.Jsonp');
 goog.require('goog.positioning');
 goog.require('goog.positioning.AnchoredPosition');
 goog.require('goog.positioning.AnchoredViewportPosition');
@@ -82,6 +83,14 @@ jericho.Main.prototype.initVariables = function() {
 jericho.Main.prototype.assignHandlers = function() {
     var index = 0;
     var length = null;
+
+    goog.events.listen(
+        window,
+        goog.events.EventType.SCROLL,
+        this.scrollCallback,
+        false,
+        this
+    );
 
     // goog.events.listen(
     //     window,
@@ -184,23 +193,39 @@ jericho.Main.prototype.assignHandlers = function() {
             );
         }
     }
-
-    goog.events.listen(
-        window,
-        goog.events.EventType.SCROLL,
-        this.scrollCallback,
-        false,
-        this
-    );
 };
 
 jericho.Main.prototype.scrollCallback = function(e) {
     var scrollY = goog.dom.getDocumentScroll().y;
     var height = goog.dom.getViewportSize().height;
+    // var headerHeight =
+    //     goog.style.getSize(this.headerSectionWrapperElement).height
+    // var totalHeight = height + headerHeight;
     var documentHeight = goog.dom.getDocumentHeight();
     console.log((scrollY + height), (documentHeight - height / 2));
     if (scrollY + height >= documentHeight - height / 2) {
-        console.log('load more');
+        var jsonp = new goog.net.Jsonp(
+            new goog.Uri(photographyPrize.Gallery.IMAGE_LIST_URL)
+        );
+        jsonp.send({
+            'tag': tag,
+            'limit': limit,
+            'offset': offset
+        }, function(reply) {
+            // Some versions of IE parse [1,] as [1,null]
+            if (reply.length > 0 && reply[reply.length - 1] == null) {
+                reply = reply.slice(0, -1);
+            }
+            if (reply.length > 0) {
+                // Load it up
+                // Increment Offset
+            }
+            // if (images.length == 0 && offset == 0) {
+            //     this.showEndMessage_(photographyPrize.Gallery.MSG_NO_IMAGES);
+            // } else if (this.loadedOffset_ != this.currentOffset_) {
+            //     this.showEndMessage_(photographyPrize.Gallery.MSG_THE_END);
+            // }
+        });
     }
 };
 

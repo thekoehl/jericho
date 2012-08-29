@@ -90,4 +90,7 @@ def list_json(request, page):
         # Return 404 if the page doesn't exist
         raise Http404
 
-    return render_to_response('list-test.json', locals(), RequestContext(request), 'text/javascript')
+    if (request.is_ajax()):
+        return render_to_response('list-test.json', locals(), RequestContext(request), 'text/javascript')
+    else:
+        return render_to_response('list-test.html', locals(), RequestContext(request))
