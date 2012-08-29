@@ -183,7 +183,26 @@ jericho.Main.prototype.assignHandlers = function() {
                 this
             );
         }
-    }};
+    }
+
+    goog.events.listen(
+        window,
+        goog.events.EventType.SCROLL,
+        this.scrollCallback,
+        false,
+        this
+    );
+};
+
+jericho.Main.prototype.scrollCallback = function(e) {
+    var scrollY = goog.dom.getDocumentScroll().y;
+    var height = goog.dom.getViewportSize().height;
+    var documentHeight = goog.dom.getDocumentHeight();
+    console.log((scrollY + height), (documentHeight - height / 2));
+    if (scrollY + height >= documentHeight - height / 2) {
+        console.log('load more');
+    }
+};
 
 /**
  * The callback when the hero wrapper has a mouse over event.
