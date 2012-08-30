@@ -29,7 +29,7 @@ goog.require('goog.fx.AnimationQueue');
 goog.require('goog.fx.dom');
 goog.require('goog.history.Html5History');
 goog.require('goog.net.cookies');
-goog.provide('goog.net.Jsonp');
+goog.require('goog.net.XhrIo');
 goog.require('goog.positioning');
 goog.require('goog.positioning.AnchoredPosition');
 goog.require('goog.positioning.AnchoredViewportPosition');
@@ -91,6 +91,21 @@ jericho.Main.prototype.assignHandlers = function() {
         false,
         this
     );
+
+    // Equivalent to jquery.live()
+    // goog.events.listen(
+    //     document.body,
+    //     goog.events.EventType.CLICK,
+    //     function(e) {
+    //         var realEvent = e.event_;
+    //         var el = e.target;
+
+    //         if (el.tagName.toLowerCase() == 'a' && (href matches pattern)) {
+    //             // ...
+    //         }
+    //     }
+    // );
+
 
     // goog.events.listen(
     //     window,
@@ -203,29 +218,41 @@ jericho.Main.prototype.scrollCallback = function(e) {
     // var totalHeight = height + headerHeight;
     var documentHeight = goog.dom.getDocumentHeight();
     console.log((scrollY + height), (documentHeight - height / 2));
-    if (scrollY + height >= documentHeight - height / 2) {
-        var jsonp = new goog.net.Jsonp(
-            new goog.Uri(photographyPrize.Gallery.IMAGE_LIST_URL)
+        if (scrollY + height >= documentHeight - height / 2) {
+        var xhrHandler = new goog.net.XhrIo();
+        var queryData = new goog.Uri.QueryData();
+        queryData.add('test', 'val1');
+        queryData.add('test2', 'val2');
+        var url = '/list-json?' + queryData.toString();
+        goog.net.XhrIo.send(
+            url,
+            this.listJsonCallback
         );
-        jsonp.send({
-            'tag': tag,
-            'limit': limit,
-            'offset': offset
-        }, function(reply) {
-            // Some versions of IE parse [1,] as [1,null]
-            if (reply.length > 0 && reply[reply.length - 1] == null) {
-                reply = reply.slice(0, -1);
-            }
-            if (reply.length > 0) {
-                // Load it up
-                // Increment Offset
-            }
-            // if (images.length == 0 && offset == 0) {
-            //     this.showEndMessage_(photographyPrize.Gallery.MSG_NO_IMAGES);
-            // } else if (this.loadedOffset_ != this.currentOffset_) {
-            //     this.showEndMessage_(photographyPrize.Gallery.MSG_THE_END);
-            // }
-        });
+    }
+};
+
+jericho.Main.prototype.listJsonCallback = function(e) {
+    var xhrHandler = (e.target);
+    if (xhrHandler.isSuccess()) {
+        var responseJson = xhrHandler.getResponseJson();
+        if (responseJson.status == 1) {
+            // Success! The response code was 200, 204, or 304.
+            console.log(responseJson);
+        }
+        else {
+            console.log(responseJson);
+            // Problem hitting the url from the proxy
+        }
+    }
+    else if (xhrHandler.getLastErrorCode() == goog.net.ErrorCode.ABORT) {
+        // abort() called.
+    }
+    else if (xhrHandler.getLastErrorCode() == goog.net.ErrorCode.TIMEOUT) {
+        // Timeout exceeded.
+    } else {
+        // Some other error occurred.
+        // Inspecting the value of xhrHandler.getStatus() is
+        // a good place to start to determine the source of the error.
     }
 };
 

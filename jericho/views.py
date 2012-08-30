@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 from django.core.paginator import Paginator, InvalidPage
+from django.utils import simplejson
 
 from jericho.models import Post, SiteMessaging
 
@@ -63,11 +64,6 @@ def list(request, post_id=0):
 
     return render_to_response('list.html', locals(), RequestContext(request))
 
-def show(request, post_id=0):
-    return render_to_response('show.html', locals(), RequestContext(request))
-
-
-
 def list_test(request):
     # Pull the data
     post_list = Post.objects.all()
@@ -78,19 +74,34 @@ def list_test(request):
 
     return render_to_response('list-test.html', locals(), RequestContext(request))
 
-def list_json(request, page):
+def list_json(request):
     # Pull the data
     post_list = Post.objects.all()
+    page = request.GET.get('page');
 
     # Grab the first page of 100 items
-    paginator = Paginator(post_list, 100)
-    try:
-        page_object = paginator.page(page)
-    except InvalidPage:
-        # Return 404 if the page doesn't exist
-        raise Http404
+    paginator = Paginator(post_list, 5)
+    page_object = paginator.page(1)
 
-    if (request.is_ajax()):
-        return render_to_response('list-test.json', locals(), RequestContext(request), 'text/javascript')
-    else:
-        return render_to_response('list-test.html', locals(), RequestContext(request))
+    response_data = {}
+    response_data['page'] = page_object.number
+    response_data['test'] = request.GET.get('test');
+    # response_data['hasNext'] = page_object.has_next
+
+    # for (key, post in page_object.object_list):
+    #     item_list[key] = {}
+    #     item_list[key]['string'] = "{{ post.added_datetime|date:"U" }}:&nbsp;&nbsp;&nbsp;{{ post|truncatewords:10|escapejs }}"
+
+    # response_data['itemList'] = item_list;
+    return HttpResponse(simplejson.dumps(response_data), mimetype="application/json")
+
+    # # Pull the data
+    # post_list = Post.objects.all()
+
+    # # Grab the first page of 100 items
+    # paginator = Paginator(post_list, 100)
+    # try:
+    #     page_object = paginator.page(page)
+    # except InvalidPage:
+    #     # Return 404 if the page doesn't exist
+    #     raise Http404
