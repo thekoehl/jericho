@@ -1,7 +1,7 @@
-*.log
-*.pot
+.DS_Store
 *.pyc
-*.DS_Store
-settings.py
 build/*
-assets/uploads/*
+media/uploads/*
+thekoehl/local_settings.py
+static/*
+thekoehl/static/tools/build/node_modules
